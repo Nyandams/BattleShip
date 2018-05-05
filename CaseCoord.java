@@ -55,5 +55,4 @@ public class CaseCoord {
 		return this.caseCoord + ":" + touchedString;
 	}
 	
-	
 }
