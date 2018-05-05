@@ -133,17 +133,30 @@ public class Player {
 	/***
 	 * 
 	 * @param missileCoord - String of a Coordinate
-	 * @return
+	 * @return 0 - Miss |
+	 * 		   1 - Hit |
+	 * 		   2 - Sink |
 	 */
-	public boolean hit(String missileCoord) {
+	public int hit(String missileCoord) {
 		boolean hit = false;
+		int res = 0;
 		int i = 0;
 		
 		while(!hit && i<this.ships.size()) {
 			hit = this.ships.get(i).hit(missileCoord);
+			if (hit) {
+				if(this.ships.get(i).isDestroyed()) {
+					res = 2;
+				}else {
+					res = 1;
+				}
+			}
+			
 			i++;
 		}
-		return hit;
+		
+		
+		return res;
 	}
 
 	/**
@@ -162,13 +175,31 @@ public class Player {
 	}
 	
 	/**
-	 * 
-	 * @param p2- player attacked
+	 * current player attack p2 player
+	 * @param p2 - player attacked
 	 * @param coord
-	 * @return 0 if it's a Miss, 1 if it's a Hit, 2 if the ship has been sunk
+	 * @return 0 if it's a Miss, 1 if it's a Hit, 2 if the ship has been sunk, -1 if already launched
 	 */
 	public int attack(Player p2, String coord) {
-		return 0;
+		
+		if (this.shotsGrid.hasCoord(coord)) {
+			return -1;
+		}else {
+			int shot = p2.hit(coord);
+			System.out.println(shot);
+			switch(shot) {
+				case 0: this.shotsGrid.addMiss(coord);
+						break;
+					
+				case 1:	this.shotsGrid.addHit(coord);
+						break;
+					
+				case 2:	this.shotsGrid.addSink(coord);
+						break;
+			}
+			return shot;
+		}
+		
 	}
 	
 	
@@ -189,10 +220,10 @@ public class Player {
 		
 		sb.append("Bateau : \n");
 		
-		int[][] shipsGrid = new int[10][10];
+		int[][] shipsGrid = new int[Configuration.LineLength][Configuration.ColumnLength];
 		
-		for(int i = 0; i<10; i++) {
-			for(int j = 0; j<10; j++) {
+		for(int i = 0; i<Configuration.LineLength; i++) {
+			for(int j = 0; j<Configuration.ColumnLength; j++) {
 				shipsGrid[i][j] = 0;
 			}
 		}
@@ -215,36 +246,50 @@ public class Player {
 				
 			}
 		}
+	sb.append("   ");
 		
-		sb.append("  1 2 3 4 5 6 7 8 9 10" + "\n");
-		for(int i = 0; i<10; i++) {
-			sb.append((char)(Configuration.LetterMin + i) + " " );
-			for(int j = 0; j<10; j++) {
-				if(shipsGrid[i][j] == 1) {
+		for(int i = 0; i < Configuration.ColumnLength; i++) {
+			sb.append((char)(Configuration.LetterMin + i) + " ");
+		}
+		sb.append("\n");
+		
+		
+		for(int i = 0; i<Configuration.LineLength; i++) {
+			if((Configuration.IntMin+i) < 10) {
+				sb.append((Configuration.IntMin+i) + "  " );
+			}else {
+				sb.append((Configuration.IntMin+i) + " " );
+			}
+			
+			
+			for(int j = 0; j<Configuration.ColumnLength; j++) {
+				if(shipsGrid[i][j] == 1) {       //safe
 					sb.append("\u25c9");
-				}else if(shipsGrid[i][j] == 2) {
+				}else if(shipsGrid[i][j] == 2) { //touched
 					sb.append("\u2605");
 				}else{
-					sb.append("\u25cb");
+					sb.append("\u25cb");         //nothing
 				}
 				sb.append(" ");
 			}
 			sb.append("\n");
-		}
-		
-		
-		
+		}	
 		return sb.toString();
 	}
 	
 
 	public static void main(String[] args) throws Exception {
 		Player p1 = new Player();
+		Player p2 = new Player();
+		
 		p1.addBattleship("A1", "D1");
-		p1.hit("B1");
 		p1.addCarrier("B2", "B6");
+		p2.addBattleship("A1", "A4");
+		p2.addCarrier("B2", "B6");
 		
-		System.out.println(p1.toString());
+		p1.attack(p2, "A2");
 		
+		System.out.println("P1 : \n" + p1.toString());
+		System.out.println("P2 : \n" + p2.toString());
 	}
 }

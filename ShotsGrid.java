@@ -1,86 +1,106 @@
+import java.util.ArrayList;
 
 public class ShotsGrid {
 	/**
-	 * -1 - no information
 	 *  0 - A miss
 	 *  1 - A hit
 	 *  2 - The ship has been sunk
 	 */
 	
-	private int[][] shotsGrid;
+	private ArrayList<Shot> shotsGrid;
 
+	
 	
 	public ShotsGrid() {
-		this.shotsGrid = new int[10][10];
-		
-		for(int i = 0; i<10; i++) {
-			for(int j = 0; j<10; j++) {
-				this.shotsGrid[i][j] = -1;
+		this.shotsGrid = new ArrayList<Shot>();
+	}
+
+	
+	public boolean hasCoord(String coord) {
+		boolean has = false;
+		for(Shot s : this.shotsGrid) {
+			if(s.getShotCoord() == coord) {
+				has = true;
 			}
 		}
+		return has;
+	}
+	/**
+	 * add a Hit in the shotsGrid
+	 * @param coord - String of the hit
+	 */
+	public void addHit(String coord) {
+		this.shotsGrid.add(new Shot(coord).setHit());
+	}
+	
+	/**
+	 * add a Miss in the shotsGrid
+	 * @param coord - String of the miss
+	 */
+	public void addMiss(String coord) {
+		this.shotsGrid.add(new Shot(coord).setMiss());
+	}
+	
+	/**
+	 * add a Hit in the shotsGrid
+	 * @param coord - String of the Sink
+	 */
+	public void addSink(String coord) {
+		this.shotsGrid.add(new Shot(coord).setSink());
 	}
 	
 	
-	public int getShot (String coord) throws Exception {
-		IntCoord intCoord = new IntCoord(coord);
-		
-		return this.shotsGrid[intCoord.getLine()][intCoord.getColumn()];
-	}
-	
-	public void setHit(String coord) throws Exception {
-		IntCoord intCoord = new IntCoord(coord);;
-		System.out.println("line :" + intCoord.getLine() + "column :" + intCoord.getColumn());//System.exit(0);
-		this.shotsGrid[intCoord.getLine()][intCoord.getColumn()] = 1;
-	}
-	
-	public void setMiss(String coord) throws Exception {
-		IntCoord intCoord = new IntCoord(coord);
-		
-		this.shotsGrid[intCoord.getLine()][intCoord.getColumn()] = 0;
-	}
-	
-	public void setSink(String coord) throws Exception {
-		IntCoord intCoord = new IntCoord(coord);
-		
-		this.shotsGrid[intCoord.getLine()][intCoord.getColumn()] = 2;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 	public String toString() {
+		int shotsArray[][] = new int[Configuration.LineLength][Configuration.ColumnLength];
+		for(int i = 0; i<Configuration.LineLength; i++) {
+			for(int j = 0; j<Configuration.LineLength; j++) {
+				shotsArray[i][j] = -1;
+			}
+		}
+		
+		
+		for (Shot shot : this.shotsGrid) {
+			IntCoord intCoord;
+			try {
+				intCoord = new IntCoord(shot.getShotCoord());
+				if(shot.isHit()) {
+					shotsArray[intCoord.getLine()][intCoord.getColumn()] = 1;
+				}else if(shot.isMiss()) {
+					shotsArray[intCoord.getLine()][intCoord.getColumn()] = 0;
+				}else if(shot.isSink()) {
+					shotsArray[intCoord.getLine()][intCoord.getColumn()] = 2;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}			
+		}
+		
 		StringBuffer sb = new StringBuffer();
 		sb.append("TIRS :\n");
-		sb.append("  1 2 3 4 5 6 7 8 9 10" + "\n");
+		sb.append("   ");
 		
-		for(int i = 0; i<10; i++) {
-			sb.append((char)(Configuration.LetterMin+i) + " " );
-			for(int j = 0; j<10; j++) {
-				if(this.shotsGrid[i][j]  == 0) {
+		for(int i = 0; i < Configuration.ColumnLength; i++) {
+			sb.append((char)(Configuration.LetterMin + i) + " ");
+		}
+		sb.append("\n");
+		
+		
+		for(int i = 0; i<Configuration.LineLength; i++) {
+			if((Configuration.IntMin+i) < 10) {
+				sb.append((Configuration.IntMin+i) + "  " );
+			}else {
+				sb.append((Configuration.IntMin+i) + " " );
+			}
+			
+			
+			for(int j = 0; j<Configuration.ColumnLength; j++) {
+				if(shotsArray[i][j]  == 0) {
 					sb.append("\u25ce");
-				}else if(this.shotsGrid[i][j] == 1){
+				}else if(shotsArray[i][j] == 1){
 					sb.append("\u25c9");
-				}else if(this.shotsGrid[i][j] == 2) {
+				}else if(shotsArray[i][j] == 2) {
 					sb.append("\u2605");
-				}else if(this.shotsGrid[i][j] == -1) {
+				}else if(shotsArray[i][j] == -1) {
 					sb.append("\u25cb");
 				}
 				sb.append(" ");
@@ -90,18 +110,20 @@ public class ShotsGrid {
 		
 		return sb.toString();
 	}
+	
+	
 
 	public static void main(String[] args) throws Exception {
 		ShotsGrid s = new ShotsGrid();
 		System.out.println(s.toString());
 		
-		s.setHit("A5");
-		s.setHit("A6");
-		s.setHit("A10");
+		s.addHit("A5");
+		s.addHit("A6");
+		s.addHit("A10");
 		
-		s.setMiss("A10");
+		s.addMiss("A10");
 		
-		s.setSink("A8");
+		s.addSink("A8");
 		System.out.println(s.toString());
 
 	}

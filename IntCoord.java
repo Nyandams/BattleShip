@@ -18,8 +18,8 @@ public class IntCoord {
 		}else {
 			throw new Exception("invalid coordinates (length)");
 		}
-		this.line   = getCorrespondingLine(coordLetter);
-		this.column = getCorrespondingColumn(coordInt);
+		this.column   = getCorrespondingLine(coordLetter);
+		this.line = getCorrespondingColumn(coordInt);
 		
 	}
 	
