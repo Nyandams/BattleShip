@@ -20,10 +20,7 @@ public class Ship {
 		
 		
 		//verification about the validity of the coordinates in the grid
-		if( (int)startLetter >= (int)Configuration.LetterMin && (int)startLetter <= (int)Configuration.LetterMax &&
-			(int)endLetter >= (int)Configuration.LetterMin && (int)endLetter <= (int)Configuration.LetterMax &&
-			startInt >= Configuration.IntMin && startInt <= Configuration.IntMax &&
-			endInt >= Configuration.IntMin && endInt <= Configuration.IntMax) {
+		if(StringConvert.gridValidity(startLetter, startInt) && StringConvert.gridValidity(endLetter, endInt)) {
 			
 			// verification about the verticality or horizontality of the ship
 			if(startLetter == endLetter) {
@@ -176,8 +173,8 @@ public class Ship {
 	}
 
 	public static void main(String[] args) throws Exception {
-		Ship s1 = new Ship("A10", "F10");
-		System.out.println(s1.toString());	
+		Ship s1 = new Ship("H1", "F11");
+		System.out.println(s1.toString());
 	}
 
 }

@@ -1,3 +1,4 @@
+import java.util.Scanner;
 
 public class PlayerVsPlayer {
 
@@ -5,5 +6,151 @@ public class PlayerVsPlayer {
 		Player[] tabPlayer = new Player[2];
 		tabPlayer[0] = new Player();
 		tabPlayer[1] = new Player();
+		Scanner sc = new Scanner(System.in);
+		
+		String inputStart;
+		String inputEnd;
+		int i = 0;
+		boolean testScan = false;
+		
+		for(Player p : tabPlayer) {
+			System.out.println("Player " + (((i)%2)+1) );
+			/*System.out.println(p.fleetToString());
+			while(!testScan) {
+				System.out.println("Place a carrier(length : 5) : ");
+				System.out.print("Start Coordinates : ");
+				inputStart = sc.next();
+				System.out.print("End Coordinates : ");
+				inputEnd = sc.next();
+				
+				try {
+					p.addCarrier(inputStart, inputEnd);
+					testScan = true;
+				}catch(Exception e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			testScan = false;
+			System.out.println(p.fleetToString());
+			
+			while(!testScan) {
+				System.out.println("Place a BattleShip(length : 4) : ");
+				System.out.print("Start Coordinates : ");
+				inputStart = sc.next();
+				System.out.print("End Coordinates : ");
+				inputEnd = sc.next();
+				
+				try {
+					p.addBattleship(inputStart, inputEnd);
+					testScan = true;
+				}catch(Exception e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			testScan = false;
+			System.out.println(p.fleetToString());
+			
+			while(!testScan) {
+				System.out.println("Place a Cruiser(length : 3) : ");
+				System.out.print("Start Coordinates : ");
+				inputStart = sc.next();
+				System.out.print("End Coordinates : ");
+				inputEnd = sc.next();
+				
+				try {
+					p.addCruiser(inputStart, inputEnd);
+					testScan = true;
+				}catch(Exception e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			testScan = false;
+			System.out.println(p.fleetToString());
+			
+			
+			while(!testScan) {
+				System.out.println("Place a Submarine(length : 3) : ");
+				System.out.print("Start Coordinates : ");
+				inputStart = sc.next();
+				System.out.print("End Coordinates : ");
+				inputEnd = sc.next();
+				
+				try {
+					p.addSubmarine(inputStart, inputEnd);
+					testScan = true;
+				}catch(Exception e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			testScan = false;*/
+			System.out.println(p.fleetToString());
+			
+			while(!testScan) {
+				System.out.println("Place a Destroyer(length : 2) : ");
+				System.out.print("Start Coordinates : ");
+				inputStart = sc.next();
+				System.out.print("End Coordinates : ");
+				inputEnd = sc.next();
+				
+				try {
+					p.addDestroyer(inputStart, inputEnd);
+					testScan = true;
+				}catch(Exception e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			testScan = false;
+			System.out.println(p.fleetToString());
+			
+			i++;
+		}
+		
+		
+		
+		Player current  = tabPlayer[i%2];
+		Player opponent = tabPlayer[(i+1)%2];
+		String coord;
+		int attack;
+		while(current.alive()) {
+			System.out.println(current.toString());
+			
+			
+			while(!testScan) {
+				System.out.println("Player " + (((i)%2)+1) );
+				System.out.print("choose where you want to attack : ");
+				coord = sc.next();
+				
+				try {
+					switch(current.attack(opponent, coord)) {
+						case -1: System.out.println("you already attacked here");
+								 testScan = true;
+								 break;
+						
+						case 0 : System.out.println("MISS !");
+								 testScan = true;
+								 break;
+						
+						case 1 : System.out.println("HIT !");
+								 testScan = true;
+								 break;
+								 
+						case 2 : System.out.println("SINK !");
+								 testScan = true;
+								 break;
+					}
+				}catch(Exception e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			testScan = false;
+			
+
+			
+			i++;
+			current  = tabPlayer[i%2];
+			opponent = tabPlayer[(i+1)%2];
+		}
+		
+		System.out.println("Player " + ((i+1)%2)+1 + " WON !");
 	}
 }

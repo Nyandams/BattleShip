@@ -179,27 +179,30 @@ public class Player {
 	 * @param p2 - player attacked
 	 * @param coord
 	 * @return 0 if it's a Miss, 1 if it's a Hit, 2 if the ship has been sunk, -1 if already launched
+	 * @throws Exception 
 	 */
-	public int attack(Player p2, String coord) {
+	public int attack(Player p2, String coord) throws Exception {
 		
-		if (this.shotsGrid.hasCoord(coord)) {
-			return -1;
-		}else {
-			int shot = p2.hit(coord);
-			System.out.println(shot);
-			switch(shot) {
-				case 0: this.shotsGrid.addMiss(coord);
-						break;
-					
-				case 1:	this.shotsGrid.addHit(coord);
-						break;
-					
-				case 2:	this.shotsGrid.addSink(coord);
-						break;
+		if(StringConvert.isOk(coord)) {
+			if (this.shotsGrid.hasCoord(coord)) {
+				return -1;
+			}else {
+				int shot = p2.hit(coord);
+				switch(shot) {
+					case 0: this.shotsGrid.addMiss(coord);
+							break;
+						
+					case 1:	this.shotsGrid.addHit(coord);
+							break;
+						
+					case 2:	this.shotsGrid.addSink(coord);
+							break;
+				}
+				return shot;
 			}
-			return shot;
+		}else {
+			throw new Exception("invalid coordinates (not in the grid)");
 		}
-		
 	}
 	
 	
@@ -275,6 +278,22 @@ public class Player {
 			sb.append("\n");
 		}	
 		return sb.toString();
+	}
+	
+	/**
+	 * 
+	 * @return true if all the ship of the player aren't destroyed, else return false
+	 */
+	public boolean alive() {
+		boolean alive = false;
+		
+		for (Ship s: this.ships) {
+			if(!s.isDestroyed()) {
+				alive = true;
+			}
+		}
+		
+		return alive;
 	}
 	
 

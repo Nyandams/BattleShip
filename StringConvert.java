@@ -41,6 +41,30 @@ public class StringConvert {
 			throw new Exception("invalid coordinates (length)");
 		}
 	}
+	
+	public static boolean gridValidity(char letterCoord, int intCoord) {
+		if((int)letterCoord >= (int)Configuration.LetterMin && (int)letterCoord <= (int)Configuration.LetterMax && 
+				intCoord >= Configuration.IntMin && intCoord <= Configuration.IntMax) {
+				return true;
+		}else {
+			return false;
+		}
+	}
+	
+	public static boolean isOk(String coord) {
+		try {
+			StringConvert sc = new StringConvert(coord);
+			if(gridValidity(sc.getLetterCoord(), sc.getIntCoord())) {
+				return true;
+			}else {
+				return false;
+			}
+		}catch(Exception e) {
+			return false;
+		}
+		
+		
+	}
 
 	public char getLetterCoord() {
 		return letterCoord;
@@ -49,4 +73,5 @@ public class StringConvert {
 	public int getIntCoord() {
 		return intCoord;
 	}
+	
 }
