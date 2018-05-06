@@ -13,38 +13,12 @@ public class Ship {
 	 */
 	public Ship(String startCoord, String endCoord) throws Exception {
 		//Coordinates conversion into Char and Integer
-		char startLetter;
-		char endLetter;
-		int startInt;
-		int endInt;
+		char startLetter = StringConvert.getCorrespondingLetter(startCoord);
+		char endLetter   = StringConvert.getCorrespondingLetter(endCoord);
+		int startInt 	 = StringConvert.getCorrespondingInt(startCoord);
+		int endInt		 = StringConvert.getCorrespondingInt(endCoord);
 		
-		if(startCoord.length() == 2 && endCoord.length() == 2) {
-			startLetter = Character.toUpperCase(startCoord.charAt(0));
-			endLetter   = Character.toUpperCase(endCoord.charAt(0));
-			
-			startInt	= Integer.parseInt(String.valueOf(startCoord.charAt(1)));
-			endInt		= Integer.parseInt(String.valueOf(endCoord.charAt(1)));
-		}else if(startCoord.length() == 3 && endCoord.length() == 3) {
-			startLetter = Character.toUpperCase(startCoord.charAt(0));
-			endLetter   = Character.toUpperCase(endCoord.charAt(0));
-			
-			startInt	= Integer.parseInt(new StringBuilder().append(startCoord.charAt(1)).append(startCoord.charAt(2)).toString());
-			endInt		= Integer.parseInt(new StringBuilder().append(endCoord.charAt(1)).append(endCoord.charAt(2)).toString());
-		}else if(startCoord.length() == 2 && endCoord.length() == 3){
-			startLetter = Character.toUpperCase(startCoord.charAt(0));
-			endLetter   = Character.toUpperCase(endCoord.charAt(0));
-			
-			startInt	= Integer.parseInt(String.valueOf(startCoord.charAt(1)));
-			endInt		= Integer.parseInt(new StringBuilder().append(endCoord.charAt(1)).append(endCoord.charAt(2)).toString());
-		}else if(startCoord.length() == 3 && endCoord.length() == 2){
-			startLetter = Character.toUpperCase(startCoord.charAt(0));
-			endLetter   = Character.toUpperCase(endCoord.charAt(0));
-			
-			startInt	= Integer.parseInt(new StringBuilder().append(startCoord.charAt(1)).append(startCoord.charAt(2)).toString());
-			endInt		= Integer.parseInt(String.valueOf(endCoord.charAt(1)));
-		}else {
-			throw new Exception("invalid coordinates (length)");
-		}
+		
 		//verification about the validity of the coordinates in the grid
 		if( (int)startLetter >= (int)Configuration.LetterMin && (int)startLetter <= (int)Configuration.LetterMax &&
 			(int)endLetter >= (int)Configuration.LetterMin && (int)endLetter <= (int)Configuration.LetterMax &&
@@ -202,7 +176,7 @@ public class Ship {
 	}
 
 	public static void main(String[] args) throws Exception {
-		Ship s1 = new Ship("A10", "F11");
+		Ship s1 = new Ship("A10", "F10");
 		System.out.println(s1.toString());	
 	}
 
