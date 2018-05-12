@@ -1,4 +1,8 @@
+package ovh.lecha.battleship.intern;
 import java.util.ArrayList;
+
+import ovh.lecha.battleship.config.Configuration;
+import ovh.lecha.battleship.conversion.IntCoord;
 
 public class ShotsGrid {
 	/**
@@ -15,11 +19,15 @@ public class ShotsGrid {
 		this.shotsGrid = new ArrayList<Shot>();
 	}
 
-	
+	/**
+	 * 
+	 * @param coord
+	 * @return
+	 */
 	public boolean hasCoord(String coord) {
 		boolean has = false;
 		for(Shot s : this.shotsGrid) {
-			if(s.getShotCoord() == coord) {
+			if(s.getShotCoord().equals(coord)) {
 				has = true;
 			}
 		}
@@ -95,13 +103,13 @@ public class ShotsGrid {
 			
 			for(int j = 0; j<Configuration.ColumnLength; j++) {
 				if(shotsArray[i][j]  == 0) {
-					sb.append("\u25ce");
+					sb.append("o");
 				}else if(shotsArray[i][j] == 1){
-					sb.append("\u25c9");
+					sb.append("+");
 				}else if(shotsArray[i][j] == 2) {
-					sb.append("\u2605");
+					sb.append("x");
 				}else if(shotsArray[i][j] == -1) {
-					sb.append("\u25cb");
+					sb.append(".");
 				}
 				sb.append(" ");
 			}
@@ -118,6 +126,7 @@ public class ShotsGrid {
 		System.out.println(s.toString());
 		
 		s.addHit("A5");
+		System.out.println(s.hasCoord("A5"));
 		s.addHit("A6");
 		s.addHit("A10");
 		

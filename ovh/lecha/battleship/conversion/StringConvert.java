@@ -1,3 +1,6 @@
+package ovh.lecha.battleship.conversion;
+
+import ovh.lecha.battleship.config.Configuration;
 
 public class StringConvert {
 	private char letterCoord;

@@ -1,4 +1,7 @@
+package ovh.lecha.battleship.intern;
 import java.util.ArrayList;
+
+import ovh.lecha.battleship.conversion.StringConvert;
 
 public class Ship {
 	
@@ -120,9 +123,7 @@ public class Ship {
 			}
 			j++;
 		}
-			
-			
-		
+				
 		return has;
 	}
 	

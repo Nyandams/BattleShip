@@ -1,3 +1,4 @@
+package ovh.lecha.battleship.intern;
 
 public class CaseCoord {
 	private String  caseCoord;

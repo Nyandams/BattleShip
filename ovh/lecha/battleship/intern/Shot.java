@@ -1,13 +1,8 @@
+package ovh.lecha.battleship.intern;
 
 public class Shot {
 	private String  shotCoord;
-	private int state;
-	
-	/**
-	 *  0 - A miss
-	 *  1 - A hit
-	 *  2 - The ship has been sunk
-	 */
+	private ShotState state;
 	
 	public Shot(String shotCoord) {
 		this.shotCoord = shotCoord;
@@ -20,29 +15,29 @@ public class Shot {
 	}
 	
 	public boolean isMiss() {
-		return (this.state == 0);
+		return (this.state == ShotState.MISS);
 	}
 
 	public boolean isHit() {
-		return (this.state == 1);
+		return (this.state == ShotState.HIT);
 	}
 	
 	public boolean isSink() {
-		return (this.state == 2);
+		return (this.state == ShotState.SINK);
 	}
 	
 	public Shot setMiss() {
-		this.state = 0;
+		this.state = ShotState.MISS;
 		return this;
 	}
 	
 	public Shot setHit() {
-		this.state = 1;
+		this.state = ShotState.HIT;
 		return this;
 	}
 	
 	public Shot setSink() {
-		this.state = 2;
+		this.state = ShotState.SINK;
 		return this;
 	}
 }

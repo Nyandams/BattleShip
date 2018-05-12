@@ -1,3 +1,5 @@
+package ovh.lecha.battleship.conversion;
+import ovh.lecha.battleship.config.Configuration;
 
 public class IntCoord {
 	private int line;

@@ -1,4 +1,7 @@
+package ovh.lecha.battleship;
+
 import java.util.Scanner;
+import ovh.lecha.battleship.intern.Player;
 
 public class PlayerVsPlayer {
 
@@ -24,7 +27,7 @@ public class PlayerVsPlayer {
 				inputEnd = sc.next();
 				
 				try {
-					p.addCarrier(inputStart, inputEnd);
+					p.addShip(inputStart, inputEnd, 5);
 					testScan = true;
 				}catch(Exception e) {
 					System.out.println(e.getMessage());
@@ -41,7 +44,7 @@ public class PlayerVsPlayer {
 				inputEnd = sc.next();
 				
 				try {
-					p.addBattleship(inputStart, inputEnd);
+					p.addShip(inputStart, inputEnd, 4);
 					testScan = true;
 				}catch(Exception e) {
 					System.out.println(e.getMessage());
@@ -58,7 +61,7 @@ public class PlayerVsPlayer {
 				inputEnd = sc.next();
 				
 				try {
-					p.addCruiser(inputStart, inputEnd);
+					p.addShip(inputStart, inputEnd, 3);
 					testScan = true;
 				}catch(Exception e) {
 					System.out.println(e.getMessage());
@@ -76,7 +79,7 @@ public class PlayerVsPlayer {
 				inputEnd = sc.next();
 				
 				try {
-					p.addSubmarine(inputStart, inputEnd);
+					p.addShip(inputStart, inputEnd, 3);
 					testScan = true;
 				}catch(Exception e) {
 					System.out.println(e.getMessage());
@@ -93,7 +96,7 @@ public class PlayerVsPlayer {
 				inputEnd = sc.next();
 				
 				try {
-					p.addDestroyer(inputStart, inputEnd);
+					p.addShip(inputStart, inputEnd, 2);
 					testScan = true;
 				}catch(Exception e) {
 					System.out.println(e.getMessage());
@@ -110,7 +113,6 @@ public class PlayerVsPlayer {
 		Player current  = tabPlayer[i%2];
 		Player opponent = tabPlayer[(i+1)%2];
 		String coord;
-		int attack;
 		while(current.alive()) {
 			System.out.println(current.toString());
 			
@@ -122,21 +124,21 @@ public class PlayerVsPlayer {
 				
 				try {
 					switch(current.attack(opponent, coord)) {
-						case -1: System.out.println("you already attacked here");
-								 testScan = true;
-								 break;
+						case ALREADY : 	System.out.println("you already attacked here");
+								 		testScan = true;
+								 		break;
 						
-						case 0 : System.out.println("MISS !");
-								 testScan = true;
-								 break;
+						case MISS : 	System.out.println("MISS !");
+								 		testScan = true;
+								 		break;
 						
-						case 1 : System.out.println("HIT !");
-								 testScan = true;
-								 break;
+						case HIT :		System.out.println("HIT !");
+								 		testScan = true;
+								 		break;
 								 
-						case 2 : System.out.println("SINK !");
-								 testScan = true;
-								 break;
+						case SINK : 	System.out.println("SINK !");
+								 		testScan = true;
+								 		break;
 					}
 				}catch(Exception e) {
 					System.out.println(e.getMessage());
@@ -150,7 +152,7 @@ public class PlayerVsPlayer {
 			current  = tabPlayer[i%2];
 			opponent = tabPlayer[(i+1)%2];
 		}
-		
-		System.out.println("Player " + ((i+1)%2)+1 + " WON !");
+		sc.close();
+		System.out.println("Player " + (((i+1)%2)+1) + " WON !");
 	}
 }
