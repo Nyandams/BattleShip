@@ -22,7 +22,7 @@ public class AI1 extends AI{
 	}
 	
 	@Override
-	public String choseTarget() {
+	protected String choseTarget() {
 		Random rand = new Random();
 		return this.shotsPossibility.remove(rand.nextInt(this.shotsPossibility.size()));		
 	}

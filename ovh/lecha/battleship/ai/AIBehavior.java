@@ -23,10 +23,4 @@ public interface AIBehavior {
 	 */
 	public abstract void attack(AI ia) throws Exception;
 	
-	/**
-	 * 
-	 * @return String of the coordinate the ai wants to attack
-	 */
-	public abstract String choseTarget();
-	
 }

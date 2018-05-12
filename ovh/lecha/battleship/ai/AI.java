@@ -1,7 +1,6 @@
 package ovh.lecha.battleship.ai;
 
 import java.util.Random;
-
 import ovh.lecha.battleship.config.Configuration;
 import ovh.lecha.battleship.intern.Player;
 
@@ -49,22 +48,23 @@ public abstract class AI implements AIBehavior {
 			
 	}
 	
-	
 	@Override
 	public void attack(Player playerTarget) throws Exception {
 		String coordAttack = this.choseTarget();
 		this.player.attack(playerTarget, coordAttack);
 	}
-
+	
 	@Override
 	public void attack(AI aiTarget) throws Exception {
 		String coordAttack = this.choseTarget();
 		this.player.attack(aiTarget.player, coordAttack);
 	}
 	
-	
-	public abstract String choseTarget();
-	
+	/**
+	 * 
+	 * @return String of the coordinate the ai wants to attack
+	 */
+	protected abstract String choseTarget();
 	
 	
 	public Player getPlayer() {
