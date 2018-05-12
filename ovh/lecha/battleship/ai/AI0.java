@@ -31,8 +31,9 @@ public class AI0 extends AI{
 		ai.placeShip(2);*/
 		ai2.getPlayer().addShip("A1", "A2", 2);
 		
-		String atck;
 		/*
+		String atck;
+		
 		ai1.getPlayer().attack(ai2.getPlayer(), "A1");
 		ai1.getPlayer().attack(ai2.getPlayer(), "A2");
 		ai1.getPlayer().attack(ai2.getPlayer(), "A1");

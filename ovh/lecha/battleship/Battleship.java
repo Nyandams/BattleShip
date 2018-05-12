@@ -29,7 +29,7 @@ public class Battleship {
 		int cptWin1 = 0;
 		int cptWin2 = 0;
 		int i;
-		for(int run = 0; run <1; run++) {	
+		for(int run = 0; run <100; run++) {	
 			i = 0;
 			
 			switch(inputLvl1) {
@@ -75,7 +75,7 @@ public class Battleship {
 					e.getMessage();
 				}
 				
-				System.out.println(current.getPlayer().toString());
+				//System.out.println(current.getPlayer().toString());
 				
 				i++;
 				current  = tabAI[i%2];

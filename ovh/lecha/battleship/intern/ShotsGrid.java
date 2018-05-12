@@ -13,8 +13,6 @@ public class ShotsGrid {
 	
 	private ArrayList<Shot> shotsGrid;
 
-	
-	
 	public ShotsGrid() {
 		this.shotsGrid = new ArrayList<Shot>();
 	}
