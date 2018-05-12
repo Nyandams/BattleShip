@@ -19,8 +19,8 @@ public class ShotsGrid {
 
 	/**
 	 * 
-	 * @param coord
-	 * @return
+	 * @param coord - String
+	 * @return true if the coord is in the shotsGrid
 	 */
 	public boolean hasCoord(String coord) {
 		boolean has = false;

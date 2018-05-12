@@ -1,7 +1,6 @@
 package ovh.lecha.battleship.ai;
 
 import java.util.Stack;
-
 import ovh.lecha.battleship.config.Configuration;
 import ovh.lecha.battleship.conversion.StringConvert;
 import ovh.lecha.battleship.intern.Player;
@@ -37,7 +36,6 @@ public class AI2 extends AI{
 	public void attack(Player playerTarget) throws Exception {
 		String coordAttack = this.choseTarget();
 		ShotState shot = this.player.attack(playerTarget, coordAttack);
-		System.out.println(shot);
 		if(shot == ShotState.HIT) {
 			char coordLetter	= StringConvert.getCorrespondingLetter(coordAttack);
 			int  coordInt	 	= StringConvert.getCorrespondingInt(coordAttack);
@@ -59,31 +57,46 @@ public class AI2 extends AI{
 				this.shotsStack.push(new StringBuilder().append(coordLetter).append(coordInt + 1).toString());
 			}
 		}
+		
+		
 	}
 	
 	@Override
 	public void attack(AI aiTarget) throws Exception {
 		String coordAttack = this.choseTarget();
 		ShotState shot = this.player.attack(aiTarget.player, coordAttack);
+		
 		if(shot == ShotState.HIT) {
 			char coordLetter	= StringConvert.getCorrespondingLetter(coordAttack);
 			int  coordInt	 	= StringConvert.getCorrespondingInt(coordAttack);
 
 			//up
 			if(StringConvert.gridValidity((char)((int)coordLetter - 1), coordInt)) {
-				this.shotsStack.push(new StringBuilder().append((char)((int)coordLetter - 1)).append(coordInt).toString());
+				String up = new StringBuilder().append((char)((int)coordLetter - 1)).append(coordInt).toString();
+				if(!this.player.hasAlreadyFired(up)) {
+					this.shotsStack.push(up);
+				}
 			}
 			//down
 			if(StringConvert.gridValidity((char)((int)coordLetter + 1), coordInt)) {
-				this.shotsStack.push(new StringBuilder().append((char)((int)coordLetter + 1)).append(coordInt).toString());
+				String down = new StringBuilder().append((char)((int)coordLetter + 1)).append(coordInt).toString();
+				if(!this.player.hasAlreadyFired(down)) {
+					this.shotsStack.push(down);
+				}
 			}
 			//left
 			if(StringConvert.gridValidity(coordLetter, coordInt - 1)) {
-				this.shotsStack.push(new StringBuilder().append(coordLetter).append(coordInt - 1).toString());
+				String left = new StringBuilder().append(coordLetter).append(coordInt - 1).toString();
+				if(!this.player.hasAlreadyFired(left)) {
+					this.shotsStack.push(left);
+				}
 			}
 			//right
 			if(StringConvert.gridValidity(coordLetter, coordInt + 1)) {
-				this.shotsStack.push(new StringBuilder().append(coordLetter).append(coordInt + 1).toString());
+				String right = new StringBuilder().append(coordLetter).append(coordInt + 1).toString();
+				if(!this.player.hasAlreadyFired(right)) {
+					this.shotsStack.push(right);
+				}
 			}
 		}
 	}

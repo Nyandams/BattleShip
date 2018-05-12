@@ -16,6 +16,15 @@ public class Player {
 	}
 	
 	/**
+	 * 
+	 * @param coord - String
+	 * @return true if the has already fired at the coordinate coord
+	 */
+	public boolean hasAlreadyFired(String coord) {
+		return this.shotsGrid.hasCoord(coord);
+	}
+	
+	/**
 	 * Add a Ship to the player's fleet
 	 * @param startCoord - String of the top left coordinate
 	 * @param endCoord - String of the bottom right coordinate
