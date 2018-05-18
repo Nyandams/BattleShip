@@ -6,3 +6,5 @@ TO DO :
 - main player vs IA
 
 Upgrade possible for ai2 : ADD a random in the choseTarget
+
+ALTERNER les tours
