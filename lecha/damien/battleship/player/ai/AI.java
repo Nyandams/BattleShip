@@ -23,7 +23,6 @@ public abstract class AI extends Player {
 			char startLetter, endLetter;
 			int startInt, endInt;
 			String startCoord, endCoord;
-			
 			//vertical
 			if(rn.nextBoolean()) {
 				startLetter	= (char)((int)Configuration.LetterMin + rn.nextInt(Configuration.ColumnLength - shipLength));

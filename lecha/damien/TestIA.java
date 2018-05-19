@@ -112,6 +112,8 @@ public class TestIA {
 		} catch (FileNotFoundException e1) {
 			System.err.println("the csv file failed and wasn't found !");
 		}
+		
+		System.out.println("completed");
 	}
 
 }
