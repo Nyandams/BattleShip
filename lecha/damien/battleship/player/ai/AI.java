@@ -4,7 +4,7 @@ import java.util.Random;
 
 import lecha.damien.battleship.config.Configuration;
 import lecha.damien.battleship.intern.ShotState;
-import lecha.damien.player.Player;
+import lecha.damien.battleship.player.Player;
 
 public abstract class AI extends Player {
 

@@ -3,11 +3,11 @@ package lecha.damien;
 import java.util.Scanner;
 
 import lecha.damien.battleship.config.Configuration;
+import lecha.damien.battleship.player.Player;
 import lecha.damien.battleship.player.ai.AI0;
 import lecha.damien.battleship.player.ai.AI1;
 import lecha.damien.battleship.player.ai.AI2;
-import lecha.damien.player.Player;
-import lecha.damien.player.human.Human;
+import lecha.damien.battleship.player.human.Human;
 
 public class BattleShip {
 

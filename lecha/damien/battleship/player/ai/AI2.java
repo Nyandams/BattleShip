@@ -5,7 +5,7 @@ import java.util.Stack;
 import lecha.damien.battleship.config.Configuration;
 import lecha.damien.battleship.conversion.StringConvert;
 import lecha.damien.battleship.intern.ShotState;
-import lecha.damien.player.Player;
+import lecha.damien.battleship.player.Player;
 
 public class AI2 extends AI{
 

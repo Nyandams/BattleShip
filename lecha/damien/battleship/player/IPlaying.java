@@ -1,4 +1,4 @@
-package lecha.damien.player;
+package lecha.damien.battleship.player;
 
 import lecha.damien.battleship.intern.ShotState;
 

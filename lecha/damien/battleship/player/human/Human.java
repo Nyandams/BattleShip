@@ -1,9 +1,9 @@
-package lecha.damien.player.human;
+package lecha.damien.battleship.player.human;
 
 import java.util.Scanner;
 
 import lecha.damien.battleship.intern.ShotState;
-import lecha.damien.player.Player;
+import lecha.damien.battleship.player.Player;
 
 public class Human extends Player {
 	
