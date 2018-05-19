@@ -5,12 +5,12 @@ import lecha.damien.battleship.config.Configuration;
 import lecha.damien.battleship.conversion.IntCoord;
 import lecha.damien.battleship.conversion.StringConvert;
 
-public class Player {
+public class GameBoard {
 	
 	private ArrayList<Ship> ships;
 	private ShotsGrid shotsGrid;
 	
-	public Player() {
+	public GameBoard() {
 		this.ships     = new ArrayList<Ship>();	
 		this.shotsGrid = new ShotsGrid();
 	}
@@ -25,7 +25,7 @@ public class Player {
 	}
 	
 	/**
-	 * Add a Ship to the player's fleet
+	 * Add a Ship to the gameBoard's fleet
 	 * @param startCoord - String of the top left coordinate
 	 * @param endCoord - String of the bottom right coordinate
 	 * @param shipLength - integer of the length we want for the ship
@@ -91,13 +91,13 @@ public class Player {
 	}
 	
 	/**
-	 * current player attack p2 player
-	 * @param p2 - player attacked
+	 * current gameBoard attack p2 gameBoard
+	 * @param p2 - gameBoard attacked
 	 * @param coord
 	 * @return ShotState
 	 * @throws Exception "invalid coordinates (not in the grid)"
 	 */
-	public ShotState attack(Player p2, String coord) throws Exception {
+	public ShotState attack(GameBoard p2, String coord) throws Exception {
 		
 		if(StringConvert.isOk(coord)) {
 			ShotState shot;
@@ -143,7 +143,7 @@ public class Player {
 	
 	/**
 	 * 
-	 * @return String of the fleet of the player
+	 * @return String of the fleet of the gameBoard
 	 */
 	public String fleetToString() {
 		StringBuffer sb = new StringBuffer();
@@ -209,7 +209,7 @@ public class Player {
 	
 	/**
 	 * 
-	 * @return true if all the ship of the player aren't destroyed, else return false
+	 * @return true if all the ship of the gameBoard aren't destroyed, else return false
 	 */
 	public boolean alive() {
 		boolean alive = false;
@@ -225,8 +225,8 @@ public class Player {
 	
 
 	public static void main(String[] args) throws Exception {
-		Player p1 = new Player();
-		Player p2 = new Player();
+		GameBoard p1 = new GameBoard();
+		GameBoard p2 = new GameBoard();
 		
 		p1.addShip("A1", "A3", 3);
 		p1.addShip("B1", "D1", 3);

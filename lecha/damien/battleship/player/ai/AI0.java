@@ -1,13 +1,17 @@
-package lecha.damien.battleship.ai;
+package lecha.damien.battleship.player.ai;
 
 import java.util.Random;
 
 import lecha.damien.battleship.config.Configuration;
 
 public class AI0 extends AI{
+	
+	public AI0(String name) {
+		super(name);
+	}
 
 	@Override
-	protected String choseTarget() {
+	public String choseTarget() {
 		Random rn = new Random();
 		
 		char coordLetter	= 	(char)((int)Configuration.LetterMin + rn.nextInt(Configuration.ColumnLength));

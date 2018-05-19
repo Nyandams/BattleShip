@@ -1,17 +1,20 @@
-package lecha.damien.battleship.ai;
+package lecha.damien.battleship.player.ai;
 
 import java.util.Random;
 
 import lecha.damien.battleship.config.Configuration;
-import lecha.damien.battleship.intern.Player;
+import lecha.damien.battleship.intern.ShotState;
+import lecha.damien.player.Player;
 
-public abstract class AI implements AIBehavior {
-	protected Player player;
-	
-	public AI() {
-		this.player = new Player();
+public abstract class AI extends Player {
+
+
+
+	public AI(String name) {
+		super(name);
 	}
-	
+
+
 	@Override
 	public void placeShip(int shipLength){
 		boolean testPlace = false;
@@ -40,7 +43,7 @@ public abstract class AI implements AIBehavior {
 			}
 			
 			try {
-				this.player.addShip(startCoord, endCoord, shipLength);
+				this.gameBoard.addShip(startCoord, endCoord, shipLength);
 				testPlace = true;
 			}catch(Exception e) {
 				
@@ -49,26 +52,16 @@ public abstract class AI implements AIBehavior {
 			
 	}
 	
-	@Override
-	public void attack(Player playerTarget) throws Exception {
+	
+	public ShotState attack(Player opponent) {
 		String coordAttack = this.choseTarget();
-		this.player.attack(playerTarget, coordAttack);
-	}
-	
-	@Override
-	public void attack(AI aiTarget) throws Exception {
-		String coordAttack = this.choseTarget();
-		this.player.attack(aiTarget.player, coordAttack);
-	}
-	
-	/**
-	 * 
-	 * @return String of the coordinate the ai wants to attack
-	 */
-	protected abstract String choseTarget();
-	
-	
-	public Player getPlayer() {
-		return this.player;
+		ShotState shot = null;
+		try {
+			shot = this.gameBoard.attack(opponent.getGameBoard(), coordAttack);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return shot;
 	}
 }
