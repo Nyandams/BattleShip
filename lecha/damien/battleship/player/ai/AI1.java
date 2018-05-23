@@ -13,10 +13,10 @@ public class AI1 extends AI{
 		this.shotsPossibility = new ArrayList<String>();
 		
 		for(int i = 0; i < Configuration.LineLength; i++) {
-			for(int j = 0; j < Configuration.LineLength; j++) {
+			for(int j = 0; j < Configuration.ColumnLength; j++) {
 				
-				char coordLetter	= 	(char)((int)Configuration.LetterMin + i);
-				int coordInt 		=  	Configuration.IntMin + j;
+				char coordLetter	= 	(char)((int)Configuration.LetterMin + j);
+				int coordInt 		=  	Configuration.IntMin + i;
 				shotsPossibility.add(new StringBuilder().append(coordLetter).append(coordInt).toString());
 			}
 		}

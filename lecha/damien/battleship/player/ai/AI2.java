@@ -18,7 +18,7 @@ public class AI2 extends AI{
 		int j = 0;
 
 		while(i<Configuration.LineLength){
-			while(j<Configuration.LineLength) {
+			while(j<Configuration.ColumnLength) {
 				char coordLetter	= 	(char)((int)Configuration.LetterMin + i);
 				int coordInt 		=  	Configuration.IntMin + j;
 				shotsStack.push(new StringBuilder().append(coordLetter).append(coordInt).toString());

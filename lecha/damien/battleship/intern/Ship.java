@@ -69,7 +69,7 @@ public class Ship {
 	 * @param missileCoord - String
 	 * @return - boolean
 	 */
-	public boolean isHit(String missileCoord) {
+	private boolean isHit(String missileCoord) {
 		boolean hit = false;
 		int i = 0;
 		while(!hit && i<this.shipCoord.size()) {

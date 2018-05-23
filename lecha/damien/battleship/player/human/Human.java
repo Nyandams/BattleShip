@@ -15,6 +15,7 @@ public class Human extends Player {
 	public void placeShip(int shipLength) {
 		Scanner scPlace = new Scanner(System.in);
 		String inputStart, inputEnd;
+		System.out.println(this.gameBoard.fleetToString());
 		boolean testScan = false;
 
 		while (!testScan) {
@@ -56,7 +57,9 @@ public class Human extends Player {
 		return coord;
 	}
 	
+	
 	public String toString() {
 		return this.gameBoard.toString();
 	}
+
 }

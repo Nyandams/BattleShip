@@ -59,7 +59,7 @@ public class ShotsGrid {
 	public String toString() {
 		int shotsArray[][] = new int[Configuration.LineLength][Configuration.ColumnLength];
 		for(int i = 0; i<Configuration.LineLength; i++) {
-			for(int j = 0; j<Configuration.LineLength; j++) {
+			for(int j = 0; j<Configuration.ColumnLength; j++) {
 				shotsArray[i][j] = -1;
 			}
 		}
@@ -92,7 +92,7 @@ public class ShotsGrid {
 		
 		
 		for(int i = 0; i<Configuration.LineLength; i++) {
-			if((Configuration.IntMin+i) < 10) {
+			if((Configuration.IntMin+i) < Configuration.IntMax) {
 				sb.append((Configuration.IntMin+i) + "  " );
 			}else {
 				sb.append((Configuration.IntMin+i) + " " );
@@ -115,23 +115,5 @@ public class ShotsGrid {
 		}
 		
 		return sb.toString();
-	}
-	
-	
-
-	public static void main(String[] args) throws Exception {
-		ShotsGrid s = new ShotsGrid();
-		System.out.println(s.toString());
-		
-		s.addHit("A5");
-		System.out.println(s.hasCoord("A5"));
-		s.addHit("A6");
-		s.addHit("A10");
-		
-		s.addMiss("A10");
-		
-		s.addSink("A8");
-		System.out.println(s.toString());
-
 	}
 }

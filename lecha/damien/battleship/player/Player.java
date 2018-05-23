@@ -22,4 +22,8 @@ public abstract class Player implements IPlaying{
 	public String getName() {
 		return this.name;
 	}
+	
+	public String toString() {
+		return this.gameBoard.toString();
+	}
 }

@@ -185,7 +185,7 @@ public class GameBoard {
 		
 		
 		for(int i = 0; i<Configuration.LineLength; i++) {
-			if((Configuration.IntMin+i) < 10) {
+			if((Configuration.IntMin+i) < Configuration.IntMax) {
 				sb.append((Configuration.IntMin+i) + "  " );
 			}else {
 				sb.append((Configuration.IntMin+i) + " " );
@@ -221,24 +221,5 @@ public class GameBoard {
 		}
 		
 		return alive;
-	}
-	
-
-	public static void main(String[] args) throws Exception {
-		GameBoard p1 = new GameBoard();
-		GameBoard p2 = new GameBoard();
-		
-		p1.addShip("A1", "A3", 3);
-		p1.addShip("B1", "D1", 3);
-		p2.addShip("A1", "A3", 3);
-		p1.attack(p2, "A1");
-		p1.attack(p2,"A2");
-		p1.attack(p2, "A3");
-		p1.attack(p2, "A2");
-		p1.attack(p2, "A1");
-		p1.attack(p2,"A2");
-		//System.out.println("P2 : \n" + p2.toString());
-		System.out.println("P1 : \n" + p1.toString());
-		
 	}
 }

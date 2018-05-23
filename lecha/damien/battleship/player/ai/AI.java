@@ -22,15 +22,28 @@ public abstract class AI extends Player {
 			Random rn = new Random();
 			char startLetter, endLetter;
 			int startInt, endInt;
-			String startCoord, endCoord;
+			String startCoord = "";
+			String endCoord = "";
+			boolean choixDirection;
+			if((Configuration.ColumnLength - shipLength) <1 && (Configuration.LineLength - shipLength) <1) {
+				throw new Error("Impossibility to place the ship in the grid due to the capacity of the grid");
+			} else if((Configuration.LineLength - shipLength) <1) {
+				choixDirection = true;
+			}else if((Configuration.ColumnLength - shipLength) <1) {
+				choixDirection = false;
+			}else {
+				choixDirection = rn.nextBoolean();
+			}
 			//vertical
-			if(rn.nextBoolean()) {
+			
+			if(choixDirection) {
 				startLetter	= (char)((int)Configuration.LetterMin + rn.nextInt(Configuration.ColumnLength - shipLength));
 				startInt 		=  Configuration.IntMin + rn.nextInt(Configuration.LineLength);
 				startCoord	=  new StringBuilder().append(startLetter).append(startInt).toString();
 				endInt 		= startInt;
 				endLetter	= (char)((int)startLetter + shipLength - 1);
 				endCoord 	= new StringBuilder().append(endLetter).append(endInt).toString();
+				
 			//horizontal
 			}else {
 				startLetter= (char)((int)Configuration.LetterMin + rn.nextInt(Configuration.ColumnLength));
@@ -39,6 +52,7 @@ public abstract class AI extends Player {
 				endLetter	= startLetter;
 				endInt		= startInt + shipLength - 1;
 				endCoord 	= new StringBuilder().append(endLetter).append(endInt).toString();
+				
 			}
 			
 			try {
